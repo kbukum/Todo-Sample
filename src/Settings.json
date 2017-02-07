@@ -1,0 +1,14 @@
+{
+  "dev-json-server": {
+    "backendUrl": "http://localhost:3000",
+    "idField": "id"
+  },
+  "dev-robe": {
+    "backendUrl": "http://localhost:8282/todo",
+    "idField": "oid"
+  },
+  "production": {
+    "backendUrl": "http://localhost:8181/todo",
+    "idField": "oid"
+  }
+}

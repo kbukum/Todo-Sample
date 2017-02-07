@@ -1,12 +1,12 @@
 {
-  "name": "todo",
+  "name": "todo-sample-ui",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build:lib": "rimraf ./lib & babel ./src --out-dir ./lib  --copy-files",
-    "build": "webpack --config config/dev/webpack.js",
-    "start": "webpack-dev-server --config config/dev/webpack.js",
+    "start": "webpack-dev-server --port 8080 --config config/dev/webpack.js --env=dev-json-server",
+    "start-todo": "webpack-dev-server --port 8081 --config config/dev/webpack.js --env=dev-robe",
+    "build": "rimraf ./lib & webpack --config config/dev/webpack.js --env=production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -16,6 +16,7 @@
     "react-dom": "^15.4.2"
   },
   "devDependencies": {
+    "app-root-path": "^2.0.1",
     "babel-cli": "^6.22.2",
     "babel-core": "^6.22.1",
     "babel-loader": "^6.2.10",
@@ -24,6 +25,8 @@
     "babel-preset-stage-0": "^6.22.0",
     "copy-webpack-plugin": "^4.0.1",
     "path": "^0.12.7",
+    "robe-ajax": "^1.0.1",
+    "robe-json-server": "^0.8.19",
     "webpack": "^2.2.0",
     "webpack-dev-server": "^2.2.0"
   }

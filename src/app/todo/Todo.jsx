@@ -4,57 +4,52 @@ import TodoItem from "./TodoItem";
 
 export default class Todo extends React.Component {
     static propTypes = {
+        idField: React.PropTypes.string,
         items: React.PropTypes.arrayOf(React.PropTypes.object),
-        onClick: React.PropTypes.func.isRequired
-    }
+        add: React.PropTypes.func.isRequired,
+        delete: React.PropTypes.func.isRequired,
+        onChange: React.PropTypes.func.isRequired
+    };
     static defaultProps = {
+        idField: "oid",
         items: []
-    }
+    };
+
     constructor(props) {
         super(props);
         this.componentWillReceiveProps(props);
     }
     componentWillReceiveProps(nextProps){
-        console.log(nextProps);
-    }
-    render(){
 
+    }
+
+    render(){
         return (
             <div>
                 <h2> Todo </h2>
-                {this.generateItems(this.props.items)}
+                <table>
+                    {this.generateItems(this.props.items)}
+                    <tr>
+                        <td> Add New Item </td>
+                        <td> <button style={{backgroundColor: "blue"}} onClick={this.props.add}>+</button></td>
+                    </tr>
+                </table>
             </div>
         )
     }
 
-    componentDidUpdate(){
 
-    }
-    componentDidMount(){
-        if(this.state.isFaded) {
-            ReactDOM.findDOMNode(this).className = ""
-        }
-    }
-
-    click(){
-        ReactDOM.findDOMNode(this).className = ""
-    }
     generateItems(items) {
         let elements = [];
-
+        if(!items || items.length === 0) return elements;
         for(let i = 0 ; i < items.length; i++) {
             elements.push(
-                <TodoItem {...items[i]} />
+                <tr key={items[i][this.props.idField]}>
+                    <td> <TodoItem {...items[i]} onChange={this.props.onChange} /></td>
+                    <td> <button style={{backgroundColor: "red"}} onClick={this.props.delete.bind(undefined, i)}>-</button></td>
+                </tr>
             );
         }
-        let lastIndex = elements.length -1;
-        elements[lastIndex == -1 ? 0: lastIndex] = (<table>
-            <tr>
-                <td> { lastIndex == -1 ? null: elements[lastIndex]}</td>
-                <td> <button onClick={this.props.onClick}>+</button></td>
-            </tr>
-        </table>
-        )
         return elements;
     }
 }

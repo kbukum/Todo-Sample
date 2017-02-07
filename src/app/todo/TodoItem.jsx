@@ -6,28 +6,30 @@ const style = {
 
 export default class TodoItem extends React.Component {
     static propTypes = {
-        text: React.PropTypes.string
+        value: React.PropTypes.string,
+        onChange: React.PropTypes.func.isRequired
     };
     static defaultProps = {
-        text: "Yazı"
-    }
+        value: ""
+    };
+    item;
     constructor(props) {
         super(props);
         this.onChange = this.onChange.bind(this);
-        this.state = {
-            text: this.props.text
-        };
     }
+
     render(){
+        let {onChange, ...item} = this.props;
+        this.item = item;
         return (
             <div style={style} >
-                <input onChange={this.onChange} value={this.state.text} />
+                <input onChange={this.onChange} {...this.item} />
             </div>
         )
     }
+
     onChange(e){
-        this.setState({
-            text: e.target.value
-        });
+        this.item.value = e.target.value;
+        this.props.onChange(this.item);
     }
 }
