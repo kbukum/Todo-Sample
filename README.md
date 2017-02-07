@@ -1,4 +1,4 @@
-## TODO Example React & Es6 & Babel & Webpack
+## TODO Sample React & Es6 & Babel & Webpack
 
 ### Create TODO Project Step by Step 
 
